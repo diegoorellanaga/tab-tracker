@@ -8,10 +8,20 @@ app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(cors())
 
-app.get('/status',(req,res) => {
-	res.send({
-		message:"hello world!"
-	})
+app.post('/register',(req,res) => {
+    res.send({
+        message: `Hello ${req.body.email} your request has been heard`
+    })
+})
+app.post('/register2',(req,res) => {
+    res.send({
+        message: `Hello ${req.body.email} your request has been heard!!!!!!!!!!!!!!!`
+    })
+})
+app.get('/register',(req,res) => {
+    res.send({
+        message: `Hello your request has been heard`
+    })
 })
 
 app.listen(process.env.PORT || 8081)
