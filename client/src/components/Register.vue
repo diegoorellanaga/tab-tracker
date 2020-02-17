@@ -1,29 +1,37 @@
 <template>
-  <v-app>
+  <!-- <v-app> -->
   <v-container>
     <v-layout text-xs-center wrap>
       <v-flex xs12>
       <div class="white elevation-4">
-        <v-toolbar blue dense color="blue" primary class="cyan" dark>
+        <v-app-bar blue dense color="blue" primary class="cyan" dark>
           <v-toolbar-title>Register</v-toolbar-title>
-        </v-toolbar>
+        </v-app-bar>
         <div class="pl-4 pr-4 pt-2 pb-2">
-          <br>
-        <input
+          <v-row justify='space-around'>
+          <v-col cols="6" sm="6" md="3" align="center">
+         <v-text-field
         type="email"
         name="email"
         v-model="email"
-        placeholder="email"/>
-        <br>
-        <input
+        placeholder="email">
+         </v-text-field>
+        </v-col>
+      </v-row>
+      <v-row justify='space-around'>
+        <v-col cols="6" sm="6" md="3">
+        <v-text-field
         type="password"
         name="password"
         v-model="password"
-        placeholder="password"/>
-        <br>
+        placeholder="password">
+        </v-text-field>
+        </v-col>
+        </v-row>
         <div class="error" v-html="error"/>
         <br>
         <v-btn
+        small
         class="cyan"
         @click="register">
         Register
@@ -33,7 +41,7 @@
       </v-flex>
     </v-layout>
   </v-container>
-</v-app>
+<!-- </v-app> -->
 </template>
 
 <script>
