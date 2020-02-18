@@ -4,8 +4,8 @@ export default {
   register (credentials) {
     return Api().post('register', credentials)
   },
-  register2 (credentials) {
-    return Api().post('register2', credentials)
+  login (credentials) {
+    return Api().post('login', credentials)
   }
 }
 // AuthenticationRegister.register({data}) // this is how you call it
