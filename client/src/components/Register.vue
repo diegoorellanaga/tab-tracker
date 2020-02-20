@@ -67,6 +67,7 @@ export default {
           email: this.email,
           password: this.password
         })
+        this.error = ''
       } catch (error) {
         this.error = error.response.data.error
       }

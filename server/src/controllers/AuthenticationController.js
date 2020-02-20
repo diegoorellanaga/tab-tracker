@@ -1,5 +1,14 @@
 /* global module, require */
 const {User} = require('../models')
+const jwt = require('jsonwebtoken')
+const config = require('../config/config')
+
+function jwtSignUser(user){
+  const ONE_WEEK = 60 * 60 * 24 *7
+  return jwt.sign(user, config.authentication.jwtSecret, {
+    expiresIn: ONE_WEEK
+  })
+}
 
 module.exports = {
   async register (req, res) {
@@ -25,8 +34,11 @@ module.exports = {
           error: "Incorrect login information"
         })
       }
-
-      const isPasswordValid = password === user.password
+      //user.setDataValue('password', '$2a$08$iAX3H/Iu1EyEzqjI.nqX2eFEwbnRS6ueHSDSJPiZ7okXQ6XCSvL8C')
+      const isPasswordValid = await user.comparePassword(password)
+      console.log(password)
+      console.log(await user.comparePassword(password))
+      // console.log(await user.comparePassword('$2a$08$ZSrI7a71Cp1iZ3Zg5g0vZ.d3WiqgdtycHx8V8B49vj8nMh/I9/tBK')) $2a$08$q2YP9Kvk6/FgnFD0pob6OOJ6rNWHnQweIEsWRuM54SGBb219Gc69.
       if(!isPasswordValid){
         return res.status(403).send({
           error: "Incorrect login information"
@@ -36,9 +48,11 @@ module.exports = {
       const userJson = user.toJSON()
 
       res.send({
-        user: userJson
+        user: userJson,
+        token: jwtSignUser(userJson)
       })
     } catch (err) {
+        console.log(err)
         res.status(500).send({
             error: 'An error has ocurred trying to login'
         })

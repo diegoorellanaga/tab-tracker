@@ -24,7 +24,7 @@ app.get('/register',(req,res) => {
     })
 })
 
-sequelize.sync()
+sequelize.sync() //to drop all tables I can do Sequelize.sync({force: true})
    .then(() => {
       app.listen(config.port)
       console.log(`Server started on port ${config.port}`)
